@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 import { fetchContacts } from '../redux/operations';
 import ContactList from '../components/ContactList/ContactList';
 import ContactForm from '../components/ContactForm/ContactForm';
-import Counter from '../components/Counter/Counter';
 import Filter from '../components/Filter/Filter';
 
 export default function Contacts() {
@@ -16,13 +15,14 @@ export default function Contacts() {
 
   return (
     <>
-      <Helmet>
-        <title>Your Contacts</title>
-      </Helmet>
-      <Counter />
-      <ContactForm />
-      <Filter />
-      <ContactList />
+      <div>
+        <Helmet>
+          <title>Your Contacts</title>
+        </Helmet>
+        <ContactForm />
+        <Filter />
+        <ContactList />
+      </div>
     </>
   );
 }

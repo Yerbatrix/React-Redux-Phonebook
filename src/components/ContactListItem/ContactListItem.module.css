@@ -1,7 +1,6 @@
 .item {
-  display: flex;
   justify-content: space-between;
-  align-items: center;
+
   background-color: #f9f9f9;
   padding: 10px;
   border: 1px solid #ddd;

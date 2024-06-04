@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://6652debd813d78e6d6d67116.mockapi.io';
+axios.defaults.baseURL = 'https://https://connections-api.herokuapp.com';
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 

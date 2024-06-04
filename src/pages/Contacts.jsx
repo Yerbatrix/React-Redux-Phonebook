@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { fetchContacts } from '../redux/operations';
 import ContactList from '../components/ContactList/ContactList';

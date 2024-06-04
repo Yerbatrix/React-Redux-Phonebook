@@ -5,6 +5,7 @@ import { fetchContacts } from '../redux/operations';
 import ContactList from '../components/ContactList/ContactList';
 import ContactForm from '../components/ContactForm/ContactForm';
 import Counter from '../components/Counter/Counter';
+import Filter from '../components/Filter/Filter';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function Contacts() {
       </Helmet>
       <Counter />
       <ContactForm />
+      <Filter />
       <ContactList />
     </>
   );

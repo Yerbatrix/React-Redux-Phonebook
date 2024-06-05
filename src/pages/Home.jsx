@@ -221,7 +221,7 @@ export default function Home() {
               </li>
             </a>
             <a
-              href="https://react-helmet-async.com/"
+              href="https://github.com/nfl/react-helmet#readme"
               target="_blank"
               rel="noopener noreferrer"
               style={styles.technologyLink}

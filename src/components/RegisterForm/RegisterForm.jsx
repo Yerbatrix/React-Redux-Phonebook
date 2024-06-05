@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/auth/operations';
 import { NavLink } from 'react-router-dom';
+import { selectRegisterError } from '../../redux/auth/selectors';
 import {
   Box,
   Button,
@@ -15,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 
 export const RegisterForm = () => {
+  const registerError = useSelector(selectRegisterError);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: '',
@@ -25,7 +27,7 @@ export const RegisterForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(register(formData));
-    setFormData({ name: '', email: '', password: '' }); // Zresetuj wartości formularza po wysłaniu
+    setFormData({ name: '', email: '', password: '' });
   };
 
   const handleChange = e => {
@@ -76,6 +78,11 @@ export const RegisterForm = () => {
             required
           />
         </FormControl>
+        {registerError && (
+          <Text color="red.500" fontSize="sm" mb={4}>
+            {registerError}
+          </Text>
+        )}
         <Button type="submit" mt={4} colorScheme="teal" size="lg">
           Register
         </Button>

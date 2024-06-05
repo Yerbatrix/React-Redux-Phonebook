@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Button,
@@ -7,11 +7,14 @@ import {
   FormLabel,
   Input,
   Stack,
+  Text,
 } from '@chakra-ui/react';
 import { logIn } from '../../redux/auth/operations';
+import { selectLoginError } from '../../redux/auth/selectors';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const loginError = useSelector(selectLoginError);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -26,6 +29,11 @@ export const LoginForm = () => {
     <Box w="full" maxW="320px" p="4" borderWidth="1px" borderRadius="lg">
       <form onSubmit={handleSubmit} autoComplete="off">
         <Stack spacing="4">
+          {loginError && (
+            <Text color="red.500" textAlign="center">
+              {loginError}
+            </Text>
+          )}
           <FormControl id="email">
             <FormLabel>Email</FormLabel>
             <Input

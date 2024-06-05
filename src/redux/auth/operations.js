@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post('/users/signup', credentials);
       setAuthHeader(res.data.token);
-      thunkAPI.dispatch(resetContacts()); // Reset contacts after registration
+      thunkAPI.dispatch(resetContacts());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -32,7 +32,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post('/users/login', credentials);
       setAuthHeader(res.data.token);
-      thunkAPI.dispatch(resetContacts()); // Reset contacts after login
+      thunkAPI.dispatch(resetContacts());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -44,7 +44,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
     clearAuthHeader();
-    thunkAPI.dispatch(resetContacts()); // Reset contacts after logout
+    thunkAPI.dispatch(resetContacts());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

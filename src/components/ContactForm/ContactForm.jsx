@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Alert,
+  AlertIcon,
+  Box,
+} from '@chakra-ui/react';
 import { addContact } from '../../redux/operations';
-import css from './ContactForm.module.css';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
-  const [number, setPhone] = useState('');
+  const [number, setNumber] = useState('');
+  const [error, setError] = useState('');
   const contacts = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
 
@@ -13,59 +22,67 @@ const ContactForm = () => {
     const { name, value } = evt.target;
     if (name === 'name') {
       setName(value);
-    } else if (name === 'phone') {
-      setPhone(value);
+    } else if (name === 'number') {
+      setNumber(value);
     }
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    if (name.trim() === '' || number.trim() === '') return;
+    if (name.trim() === '' || number.trim() === '') {
+      setError('Please fill in all fields');
+      return;
+    }
 
     const isDuplicate = contacts.some(contact => contact.name === name);
     if (isDuplicate) {
-      alert('Contact with this name already exists!');
+      setError('Contact with this name already exists!');
       return;
     }
 
     dispatch(addContact({ name, number }));
     setName('');
-    setPhone('');
+    setNumber('');
+    setError('');
   };
 
   return (
-    <div className={css.container}>
+    <Box p="4" border="1px solid" borderColor="gray.200" borderRadius="md">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="nameInput">
-          Name
-          <input
+        {error && (
+          <Alert status="error" mb="4">
+            <AlertIcon />
+            {error}
+          </Alert>
+        )}
+        <FormControl id="nameInput" mb="4">
+          <FormLabel>Name</FormLabel>
+          <Input
             type="text"
             name="name"
-            id="nameInput"
             value={name}
             onChange={handleChange}
             placeholder="Enter name"
-            required
+            isRequired
           />
-        </label>
-        <label htmlFor="phoneInput">
-          Phone number
-          <input
+        </FormControl>
+        <FormControl id="phoneInput" mb="4">
+          <FormLabel>Phone number</FormLabel>
+          <Input
             type="tel"
-            name="phone"
-            id="phoneInput"
-            // pattern="^[0-9]{1,3}[-\s]?[0-9]{1,14}$"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            name="number"
             value={number}
             onChange={handleChange}
             placeholder="Enter phone number"
-            required
+            isRequired
           />
-        </label>
-        <button type="submit">Add contact</button>
+        </FormControl>
+        <Button type="submit" colorScheme="teal" w="100%">
+          Add contact
+        </Button>
       </form>
-    </div>
+    </Box>
   );
 };
 

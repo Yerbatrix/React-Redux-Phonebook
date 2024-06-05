@@ -1,20 +1,40 @@
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import css from './Navigation.module.css';
+import { Box, Link } from '@chakra-ui/react';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <nav>
-      <NavLink className={css.link} to="/">
+    <Box>
+      <Link
+        as={NavLink}
+        to="/"
+        mr="4"
+        px="3"
+        py="2"
+        rounded="md"
+        bg="teal.400"
+        color="white"
+        _hover={{ bg: 'teal.500' }}
+      >
         Home
-      </NavLink>
+      </Link>
       {isLoggedIn && (
-        <NavLink className={css.link} to="/contacts">
+        <Link
+          as={NavLink}
+          to="/contacts"
+          mr="4"
+          px="3"
+          py="2"
+          rounded="md"
+          bg="teal.400"
+          color="white"
+          _hover={{ bg: 'teal.500' }}
+        >
           Contacts
-        </NavLink>
+        </Link>
       )}
-    </nav>
+    </Box>
   );
 };
